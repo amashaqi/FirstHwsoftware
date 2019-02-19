@@ -9,7 +9,7 @@ class cart {
 	ArrayList<Integer > b = new ArrayList<Integer>();
 	 public void addf(int Q) {
 		a.add(Q);
-		
+		//daf
 	}
 	 public void addf2(int Q) {
 			b.add(Q);
