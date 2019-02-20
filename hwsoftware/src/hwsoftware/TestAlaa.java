@@ -1,20 +1,21 @@
 package hwsoftware;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.Assert.*;
 
-import org.junit.jupiter.api.Test;
 
-class MainTest {
+import org.junit.Test;
+
+public class TestAlaa {
 	
 	cart y = new cart ();
 	@Test
-	void test() {
+public 	void test() {
 		assertEquals(0,y.a.size());
 	}
 
 
 	@Test
-	void test1() {
+public	void test1() {
 		y.addf(1);
 		y.addf(1);
 		y.addf(1);
@@ -29,7 +30,7 @@ assertEquals(4, z);
 	}
 
 	@Test
-	void test2() {
+public	void test2() {
 		y.addf2(1);
 		y.addf2(1);
 		y.addf2(1);
@@ -42,7 +43,7 @@ for( int i =0 ; i< y.b.size();i++) {
 }
 assertEquals(3, z);
 	}
-	void test3() {
+public	void test3() {
 		y.clear();
 		y.addf(1);
 		y.addf(2);
