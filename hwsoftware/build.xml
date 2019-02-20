@@ -1,1 +1,76 @@
-<?xml ?>
+<project default="compile">
+<property name ="src.java.dir" location="./src/"/>
+<property name ="src.test.dir" location="./src"/>
+<property name ="result.dir" location="./target"/>
+<property name ="result.javaclasses.dir" location="${result.dir}/classes"/>
+<property name ="result.testclasses.dir" location="${result.dir}/testclasses"/>
+<property name ="result.jar.file" location="./Myproduct.jar"/>
+
+<path id="NecessaryLibraries">
+        <!--<pathelement location="./UsedLibraries/jacocoant.jar"/>-->
+        
+        
+        <pathelement location="C:\nnn\*"/>
+        <pathelement location="C:\Program Files (x86)\Jenkins\war\WEB-INF\lib\junit-4.12.jar"/>
+       
+       
+        
+    </path>
+    
+<target name="compile">
+
+
+
+            <mkdir dir ="${result.javaclasses.dir}"/>
+            <javac srcdir="${src.java.dir}" destdir="${result.javaclasses.dir}" debug="true" includeantruntime="false">
+            
+            <classpath>
+                
+                <path refid="NecessaryLibraries"/>
+                <pathelement location="${result.javaclasses.dir}"/>
+            </classpath>
+            
+            
+            </javac>
+</target>
+     
+    <target name="compile-test" depends="compile">
+        <mkdir dir="${result.testclasses.dir}"/>
+        <javac srcdir="${src.test.dir}"  destdir="${result.testclasses.dir}" debug="true" includeantruntime="false">
+            <classpath>
+                
+                <path refid="NecessaryLibraries"/>
+                <pathelement location="${result.javaclasses.dir}"/>
+            </classpath>
+        </javac>        
+    </target>
+    
+    <target name="test" depends="compile-test">
+        <!--fork : each test will run in its own JVM (to seperate test cases)-->
+        <junit printsummary="true" haltonfailure="true" fork="true">
+            <classpath>
+                <path refid="NecessaryLibraries"></path>
+                <pathelement location="${result.javaclasses.dir}"/>
+                <pathelement location="${result.testclasses.dir}"/>
+            </classpath>
+            <formatter type="brief" usefile="false"/>
+            <batchtest >
+                <fileset dir="${result.testclasses.dir}" >
+                     <include name="**/*TestAlaa.class"/>
+                </fileset>
+            </batchtest>
+            
+        </junit>
+    </target>
+    
+    
+    
+    <!-- comment Make jar or executable product -->
+<target name ="packaging" depends ="compile">
+          <jar destfile="${result.jar.file}">
+                   <fileset dir ="${result.javaclasses.dir}">
+           </fileset>
+              </jar>
+        </target>
+    
+    </project>
